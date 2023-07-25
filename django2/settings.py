@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -131,3 +131,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+"""#configurações caso tenha um servidor de e-mail
+EMAIL_HOST = 'localhost' #geralmente e localhost
+EMAIL_HOST_USER = 'no-reply@seudominio.com.br' #email no qual vai ser usado para se conectar ao servidor de e-mail
+EMAIL_PORT = 587 #porta de conexão segura geralmente é 587
+EMAIL_USER_TSL = True #se vai utilizar criptografia segura
+EMAIL_HOST_PASSWORD = 'sua-senha' # no email no-reply
+"""

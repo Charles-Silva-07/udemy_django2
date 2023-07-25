@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import ContatoForm
-from django.contrib import messages # usada para exibir as menssages de alert de sucesso erro para o bootstrap
+from django.contrib import messages
 
 
 def index(request):
@@ -9,23 +9,13 @@ def index(request):
 
 def contato(request):
 
-    form = ContatoForm(request.POST or None) # nosso form pode conter dados ou não
+    form = ContatoForm(request.POST or None)
     if str(request.method) == 'POST':
         print(f'Post{request.POST}')
         if form.is_valid():
-            nome = form.cleaned_data['nome'] # o cleaned_date pega o nome do template ´para imprimir logo abaixo
-            email = form.cleaned_data['email']
-            assunto = form.cleaned_data['assunto']
-            mensagem = form.cleaned_data['mensagem']
-
-            print('Mensagem Enviado com sucesso')
-            print(f'Nome: {nome}')
-            print(f'E-mail: {email}')
-            print(f'Assunto: {assunto}')
-            print(f'Mensagem: {mensagem}')
-
-            messages.success(request, 'E-mail enviado com sucesso') # vai ser mostrado no template
-            form = ContatoForm() # vai limpar o formulário a pos ter enviado
+            form.send_mail()
+            messages.success(request, 'E-mail enviado com sucesso')
+            form = ContatoForm()
 
         else:
             messages.error(request, 'Erro ao enviar e-mail')
